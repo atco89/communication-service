@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% import 'components/alert/error.html.twig' as errorAlert %}
+{% import 'components/alert/success.html.twig' as successAlert %}
+
+{% block title %}
+    Make a Call
+{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-lg-6 col-12 offset-lg-3 offset-0">
+            <div class="card rounded-1">
+                <div class="card-header text-white bg-primary rounded-0">
+                    <h1 class="m-0">
+                        <strong>Make a Call [{{ provider }}]</strong>
+                    </h1>
+                </div>
+                <div class="card-body rounded-1">
+                    {% for error in app.flashes('error') %}
+                        {{ errorAlert.error(error) }}
+                    {% endfor %}
+
+                    {% for success in app.flashes('success') %}
+                        {{ successAlert.success(success) }}
+                    {% endfor %}
+
+                    {{ form_start(form) }}
+                    <div class="row">
+                        {{ form_row(form.from) }}
+                        {{ form_row(form.to) }}
+                    </div>
+                    <div class="row">
+                        {{ form_row(form.call) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
